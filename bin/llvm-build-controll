@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Branch and build
+
+# Utility to change every branch and rebuild project.
+# Since for some reason these weren't made with git submodules.
+# I blame svn...
+
+DIR=`pwd`
+
+if [[ $1 = '' ]]; then
+    echo "Need an argument!"
+    exit
+fi
+
+if [[ $1 = 'ninja' ]]; then
+    echo ">>>"
+    echo "Beginning Ninja Build"
+    echo "<<<"
+
+    cd ~/Documents/workspace/llvm-git/build
+    ninja && ninja install
+    cd $DIR
+
+    exit
+fi
+
+echo ">>>"
+echo "Issuing a mass git $1 $2 $3 $4"
+echo "<<<"
+
+if [[ $1 = 'checkout' ]] && [[ $2 = 'stable' ]]; then
+    PREFIX='google/';
+    echo "Detected a needed prefix of $PREFIX for some repos";
+fi
+
+echo "-- llvm"
+cd ~/Documents/workspace/llvm-git/llvm
+git $1 $2 $3 $4
+
+echo "-- llvm/tools/clang"
+cd ~/Documents/workspace/llvm-git/llvm/tools/clang
+git $1 $PREFIX$2 $3 $4
+
+echo "-- llvm/projects/compiler-rt"
+cd ~/Documents/workspace/llvm-git/llvm/projects/compiler-rt
+git $1 $PREFIX$2 $3 $4
+
+echo "-- llvm/tools/clang/clang-tools-extra"
+cd ~/Documents/workspace/llvm-git/llvm/tools/clang/tools/clang-tools-extra
+git $1 $2 $3 $4
+
+cd $DIR
