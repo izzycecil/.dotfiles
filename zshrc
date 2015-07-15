@@ -75,7 +75,7 @@ export LESS=' -R '
 export EDITOR='ema'
 export PATH=~/.cabal/bin:~/.bin:$PATH:/usr/local/sbin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/usr/bin/core_perl
-
+export PATH=/home/izzy/Documents/workspace/llvm-git/install/bin:$PATH
 #
 # Apply Antigen
 #
