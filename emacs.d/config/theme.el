@@ -77,23 +77,22 @@
   (set-frame-font "Anonymous Pro 14"))
 
 ;;
-;; Solarized Color theme
+;; I use smyx for dark, Solarized
 ;;
+(add-to-list 'custom-theme-load-path "~/.emacs.d/smyx")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
-(load-theme 'solarized t)
-
 (setq-default frame-background-mode 'light)
 (set-frame-parameter nil 'background-mode 'light)
+(load-theme 'solarized t)
+(load-theme 'smyx t)
 
-(enable-theme 'solarized)
-
-(defun toggle-solarized ()
-  "Toggles between solarized light and dark"
+(setq -toggle-theme 'smyx)
+(defun toggle-theme ()
+  "Toggles between Solarized-Light, and Smyx"
   (interactive)
-  (setq bg-toggle (if (equal frame-background-mode 'dark)
-                  'light
-                'dark))
-  (setq-default frame-background-mode bg-toggle)
-  (set-frame-parameter nil 'background-mode bg-toggle)
-
-  (enable-theme 'solarized))
+  (if
+      (equal -toggle-theme 'smyx)
+      (progn (enable-theme 'solarized)
+             (setq -toggle-theme 'solarized))
+    (progn (enable-theme 'smyx)
+           (setq -toggle-theme 'smyx))))
