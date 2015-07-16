@@ -11,6 +11,27 @@
   :ensure t
   :bind ("C-g" . ace-jump-mode))
 
+(defun smart-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+If ARG is not nil or 1, move forward ARG - 1 lines first. If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "^p")
+  (setq arg (or arg 1))
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1))))
+
+(global-set-key (kbd "C-a") 'smart-move-beginning-of-line)
+
 ;;
 ;; YAS
 ;;
@@ -24,7 +45,7 @@
 ;;
 (electric-pair-mode 1)
 (add-to-list 'electric-pair-pairs '(?\{ . ?\}))
-
+(electric-indent-mode 1)
 
 ;;
 ;; Spell check (we all know I need it!)
@@ -67,15 +88,24 @@
   :bind (("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring))
   :config
-  (setq helm-autoresize-mode t
-        helm-push-mark-mode  t
-        helm-adaptative-mode t
-        helm-quick-update    t
-        helm-split-window-in-side-p t
-        helm-buffers-fuzzy-matching t
+  ;; rebind tab to run persistent action
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  ;; make TAB works in terminal
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  ;;list actions using C-z
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
+  (setq helm-quick-update                 t
+        helm-split-window-in-side-p       t
+        helm-buffers-fuzzy-matching       t
         helm-move-to-line-cycle-in-source t
-        helm-scroll-amount 8)
-  (helm-mode 1))
+        helm-scroll-amount                8)
+  (helm-mode            t)
+  (helm-autoresize-mode t)
+  (helm-adaptive-mode   t)
+  ;; (helm-push-mark-mode  t)
+  )
+
+
 ;;
 ;; Hastbin. If I haste a selection, it posts it to hastebin, and gives me a link.
 ;;

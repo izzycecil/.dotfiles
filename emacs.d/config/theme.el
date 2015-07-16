@@ -33,6 +33,7 @@
 (unless window-system
     (setq linum-format 'linum-format-func))
 
+;; Highlight things I hate
 (use-package highlight-chars
  :ensure t
  :init
@@ -41,21 +42,39 @@
  :config
  (hc-highlight-tabs))
 
-;; Don't use messages that you don't read
-(setq initial-scratch-message "")
-(setq inhibit-startup-message t)
+(use-package fill-column-indicator
+  :ensure t
+  :config (add-hook 'prog-mode-hook 'fci-mode))
 
-;; Don't let Emacs hurt your ears
-(setq ring-bell-function 'ignore)
 
 ;; Highlight line
 (global-hl-line-mode)
 
+;; Don't use messages that you don't read
+(setq initial-scratch-message "")
+(setq inhibit-startup-message t)
+;; Don't let Emacs hurt your ears
+(setq ring-bell-function 'ignore)
+
 ;; Column numbers, please
 (column-number-mode)
 
-;; Linnum mode
-(global-linum-mode 1)
+;; Relative linum mode
+(use-package linum-relative
+  :ensure t
+  :config
+  (global-linum-mode 1)
+  (setq
+   linum-relative-current-symbol ""
+   linum-relative-format "%3s" ))
+
+;; Fancy mode line
+;; Todo: need to config this to do some nice things.
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (setq sml/theme 'respectful)
+  (sml/setup))
 
 ;; No line-wrap
 (set-default 'truncate-lines t)

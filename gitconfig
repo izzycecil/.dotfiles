@@ -3,6 +3,10 @@
 	name = Izzy Cecil
 [core]
 	excludesfile = /home/izzy/.gitignore_global
+    editor = emacs -nw
 
 [push]
     default = simple
+
+[mergetool]
+    tool = emerge
