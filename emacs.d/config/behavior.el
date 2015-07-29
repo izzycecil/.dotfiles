@@ -54,6 +54,9 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 (add-hook 'text-mode-hook 'flyspell-prog-mode)
 (eval-after-load "flyspell" '(diminish 'flyspell-mode))
+;; (use-package helm-flyspell
+;;   :ensure t
+;;   :bind ("M-$" . helm-flyspell-correct))
 
 ;;
 ;; Autofill for text mode
@@ -66,6 +69,13 @@ point reaches the beginning or end of the buffer, stop there."
 ;;
 (use-package projectile
   :ensure t)
+
+;;
+;; Company-mode
+;;
+(use-package company
+  :ensure t
+  :config (global-company-mode t))
 
 ;;
 ;; Helm. A very nice/fancy selection engine.
@@ -104,6 +114,9 @@ point reaches the beginning or end of the buffer, stop there."
   (helm-adaptive-mode   t)
   ;; (helm-push-mark-mode  t)
   )
+
+(use-package helm-company
+  :ensure t)
 
 
 ;;
