@@ -4,3 +4,20 @@ emacs.d/elpa
 emacs.d/ido.last
 emacs.d/smex-items
 emacs.d/helm-adaptive-history
+
+# Only for the LANL branch
+bin/terra
+
+config/Trolltech.conf
+config/autostart/
+config/chromium
+config/dconf/
+config/google-chrome/
+config/gtk-2.0/
+config/evolution/
+/config/htop
+/config/libreoffice/
+config/menus/
+config/pulse
+config/user-dirs.dirs
+config/user-dirs.locale
