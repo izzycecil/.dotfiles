@@ -10,4 +10,4 @@
 (setq-default tab-stop-list (number-sequence 4 120 4))
 
 ;; I also fill to 80 char
-(setq fill-column 80)
+(setq-default fill-column 80)

@@ -38,14 +38,11 @@
  :ensure t
  :init
  (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
- (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace)
- :config
- (hc-highlight-tabs))
+ (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
 
-(use-package fill-column-indicator
-  :ensure t
-  :config (add-hook 'prog-mode-hook 'fci-mode))
-
+;; (use-package fill-column-indicator
+;;   :ensure t
+;;   :config (add-hook 'prog-mode-hook 'fci-mode))
 
 ;; Highlight line
 (global-hl-line-mode)
