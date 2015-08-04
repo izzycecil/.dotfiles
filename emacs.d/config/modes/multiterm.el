@@ -4,5 +4,4 @@
   ;; any term mode.
   ;; See https://github.com/capitaomorte/yasnippet/issues/289
   :init (add-hook 'term-mode-hook (lambda()
-                                    (yas-minor-mode -1)))
-  :config (setq multi-term-program "/usr/local/bin/zsh"))
+                                    (yas-minor-mode -1))))
