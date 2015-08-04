@@ -1,4 +1,6 @@
-(add-hook 'c-mode-common-hook
-          (lambda () (use-package clang-format
-                       :ensure t
-                       :bind ("C-F" . clang-format-buffer))))
+(use-package clang-format
+  :ensure t
+  :commands clang-format-buffer
+  :init
+  (progn (require 'cc-mode)
+         (bind-key "C-F" 'clang-format-buffer c-mode-base-map)))
